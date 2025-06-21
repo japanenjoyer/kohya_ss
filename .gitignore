@@ -54,4 +54,4 @@ data
 config.toml
 sd-scripts
 venv
-venv*
+venv*output/
