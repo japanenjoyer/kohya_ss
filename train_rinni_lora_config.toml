@@ -1,0 +1,46 @@
+[general]
+enable_bucket = true
+
+[[datasets]]
+batch_size = 1
+
+  [[datasets.subsets]]
+  image_dir = '/mnt/c/Users/jcook/git/kohya_ss/train_data/rinni/10_rinni'
+  caption_extension = '.txt'
+  resolution = [768, 768]  # Resolution goes here in subset
+  num_repeats = 10  # 10 repeats for 63 images = 630 training steps per epoch
+
+[network_args]
+network_module = 'networks.lora'
+network_dim = 128  # Higher dim for character complexity
+network_alpha = 64
+
+[optimizer_args]
+learning_rate = 0.0001
+lr_scheduler = 'cosine_with_restarts'
+lr_warmup_steps = 0
+lr_scheduler_num_cycles = 1
+
+[training_args]
+max_train_epochs = 10
+save_every_n_epochs = 2
+save_model_as = 'safetensors'
+save_last_n_epochs = 3
+keep_tokens = 0
+clip_skip = 2
+prior_loss_weight = 1
+max_token_length = 225
+xformers = true
+max_data_loader_n_workers = 0
+persistent_data_loader_workers = false
+seed = 42
+mixed_precision = 'fp16'
+
+[sample_args]
+sample_every_n_epochs = 1
+sample_prompts = "rinni, anime girl, vtuber"
+
+[saving_args]
+output_dir = './output'
+output_name = 'rinni_vtuber_lora'
+save_precision = 'fp16'

@@ -1,0 +1,33 @@
+[general]
+enable_bucket = true
+
+[[datasets]]
+resolution = 768
+batch_size = 1
+
+  [[datasets.subsets]]
+  image_dir = '/mnt/c/Users/jcook/git/kohya_ss/train_data/rinni/10_rinni'
+  caption_extension = '.txt'
+  num_repeats = 10
+
+[network_args]
+network_module = 'networks.lora'
+network_dim = 128
+network_alpha = 64
+
+[optimizer_args]
+learning_rate = 0.0001
+lr_scheduler = 'cosine_with_restarts'
+
+[training_args]
+max_train_epochs = 10
+save_every_n_epochs = 2
+save_model_as = 'safetensors'
+save_last_n_epochs = 3
+clip_skip = 2
+xformers = true
+mixed_precision = 'fp16'
+
+[saving_args]
+output_dir = './output'
+output_name = 'rinni_vtuber_lora'
